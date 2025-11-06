@@ -1,0 +1,25 @@
+<h1>Edit Movie: <%= @movie.title %></h1>
+
+<%= form_for @movie do |f| %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rating %>
+    <%= f.select :rating, Movie.all_ratings %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :release_date %>
+    <%= f.date_field :release_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :director %>
+    <%= f.text_field :director %>
+  </div>
+  <%= f.submit "Update Movie Info" %>
+<% end %>

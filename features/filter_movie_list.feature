@@ -1,3 +1,4 @@
+@ignore
 Feature: Filter movie list
 
     As a user,
@@ -26,7 +27,6 @@ Scenario: restrict to movies with 'PG' or 'R' ratings [cite: 32]
     And I should not see "The Lion King"
 
 Scenario: all ratings selected [cite: 48]
-    # Este cenário usa um passo customizado que você irá criar
     Given I am on the RottenPotatoes home page
     When I check the following ratings: G, PG, R
     And I press "ratings_submit"

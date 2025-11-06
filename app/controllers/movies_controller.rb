@@ -24,4 +24,58 @@ class MoviesController < ApplicationController
     id = params[:id] # recupera o ID do filme da rota da URI
     @movie = Movie.find(id) # busca o filme pelo ID único
   end
+
+  def search_director
+    # Encontra o filme atual pelo ID vindo da rota
+    @movie = Movie.find(params[:id])
+
+    if @movie.director.blank?
+      flash[:notice] = "'#{@movie.title}' has no director info."
+      redirect_to movies_path
+
+    else
+      # Chama o método do model
+      @movies = Movie.find_similar_by_director(@movie.director)
+    end
+  end
+  def new
+    @movie = Movie.new
+  end
+  def create
+    @movie = Movie.new(movie_params)
+    
+    if @movie.save
+      flash[:notice] = "#{@movie.title} foi criado com sucesso."
+      redirect_to movie_path(@movie)
+    else
+      # Se falhar (ex: título em branco), mostra o formulário 'new' novamente
+      render 'new'
+    end
+  end
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+  def update
+    @movie = Movie.find(params[:id])
+    
+    if @movie.update(movie_params)
+      flash[:notice] = "#{@movie.title} foi atualizado com sucesso."
+      redirect_to movie_path(@movie)
+    else
+      # Se a atualização falhar, renderiza a página de edição novamente
+      render 'edit'
+    end
+  end
+  def destroy
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    
+    flash[:notice] = "Filme '#{@movie.title}' deletado."
+    redirect_to movies_path
+  end
+  private
+  def movie_params
+    # Adiciona :director a esta lista
+    params.require(:movie).permit(:title, :rating, :release_date, :description, :director)
+  end
 end

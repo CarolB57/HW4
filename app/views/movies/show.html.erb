@@ -12,4 +12,13 @@
   <p><%= @movie.description %></p>
 </div>
 
+<%= link_to 'Edit Info', edit_movie_path(@movie) %>
 <%= link_to 'Back to movie list', movies_path, class: 'btn btn-primary' %>
+
+<%= link_to 'Find Movies With Same Director', search_directors_path(@movie) %>
+
+
+<p>
+  <strong>Director:</strong>
+  <%= @movie.director %>
+</p>

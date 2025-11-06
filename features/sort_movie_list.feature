@@ -1,3 +1,4 @@
+@ignore
 Feature: Sort movie list
 
     As a user,

@@ -52,6 +52,12 @@ module NavigationHelpers
     case page_name
     when /^the RottenPotatoes home page$/
       movies_path
+    when /^the details page for "([^"]*)"$/
+      movie = Movie.find_by_title($1)
+      movie_path(movie)
+    when /^the "Similar Movies" page for "([^"]*)"$/
+      movie = Movie.find_by_title($1)
+      search_directors_path(movie)
     else
       raise "Can't find mapping from \"#{page_name}\" to a path."
     end
