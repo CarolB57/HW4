@@ -4,7 +4,6 @@ describe MoviesController, type: :controller do
 
   describe "PUT #update" do
     before :each do
-      # Cria um filme de teste
       @movie = Movie.create(title: "Filme Teste", director: "Diretor Antigo")
     end
 
@@ -29,7 +28,7 @@ describe MoviesController, type: :controller do
         put :update, params: { id: @movie.id, movie: { title: "" } }
         @movie.reload
 
-        # Espera que o título NÃO tenha mudado
+        # Espera que o título não tenha mudado
         expect(@movie.title).to eq("Filme Original")
       end
 
@@ -49,13 +48,12 @@ describe MoviesController, type: :controller do
       end
 
       it "chama o método do model para encontrar filmes similares" do
-        # Espera que o Model 'Movie' receba a chamada
+        # Espera que o Model Movie receba a chamada
         expect(Movie).to receive(:find_similar_by_director).with('George Lucas')
 
-        # Simula o 'clique' no link
         get :search_director, params: { id: '1' }
       end
-    end # Fim do context 'com diretor'
+    end
 
     context "quando o filme NÃO tem um diretor" do
       before :each do
@@ -90,7 +88,7 @@ describe MoviesController, type: :controller do
       { title: 'Filme de Teste', rating: 'PG', release_date: '2025-01-01', director: 'Diretor de Teste' }
     end
 
-    # Define atributos inválidos (ex: sem título)
+    # Define atributos inválidos
     let(:atributos_invalidos) do
       { title: '', rating: 'PG', release_date: '2025-01-01' }
     end
@@ -111,7 +109,7 @@ describe MoviesController, type: :controller do
 
     context "com parâmetros inválidos" do
       it "não cria um novo filme no banco de dados" do
-        # Espera que o código NÃO mude a contagem de Movie
+        # Espera que o código não mude a contagem de Movie
         expect {
           post :create, params: { movie: atributos_invalidos }
         }.not_to change(Movie, :count)
@@ -126,7 +124,7 @@ describe MoviesController, type: :controller do
 
   describe "DELETE #destroy" do
     
-    # Cria um filme que possamos deletar ANTES do teste rodar
+    # Cria um filme que possamos deletar antes do teste rodar
     before :each do
       @movie_to_delete = Movie.create(title: 'Filme para Deletar', rating: 'G')
     end
@@ -143,7 +141,7 @@ describe MoviesController, type: :controller do
       expect(response).to redirect_to(movies_path)
     end
   end
-  
+
   describe "GET #index" do
     before :each do
       # Cria filmes com ratings diferentes para o teste
@@ -154,7 +152,6 @@ describe MoviesController, type: :controller do
     context "quando nenhum filtro de rating é aplicado" do
       it "mostra todos os filmes" do
         get :index
-        # 'assigns' permite verificar variáveis de instância (@movies) no teste
         expect(assigns(:movies)).to include(@movie_pg, @movie_r)
       end
     end
@@ -170,7 +167,6 @@ describe MoviesController, type: :controller do
 
       it "define corretamente os @ratings_para_mostrar" do
         get :index, params: { ratings: { 'PG' => '1' } }
-        # Isso testa especificamente o seu bloco 'else'
         expect(assigns(:ratings_para_mostrar)).to eq(['PG'])
       end
     end

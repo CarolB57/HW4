@@ -47,8 +47,10 @@ group :development do
   gem "rspec-rails"
   gem "cucumber-rails", require: false
   gem "capybara"
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
   gem "rails-controller-testing"
+  gem "brakeman", require: false
+  gem "rubocop", require: false
 end
 
 group :test do
@@ -56,6 +58,8 @@ group :test do
   gem "capybara"
   gem "database_cleaner-active_record"
   gem "rspec-rails"
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
   gem "rails-controller-testing"
+  gem "brakeman", require: false
+  gem "rubocop", require: false
 end

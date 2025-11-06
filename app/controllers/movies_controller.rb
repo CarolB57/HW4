@@ -48,7 +48,7 @@ class MoviesController < ApplicationController
       flash[:notice] = "#{@movie.title} foi criado com sucesso."
       redirect_to movie_path(@movie)
     else
-      # Se falhar (ex: título em branco), mostra o formulário 'new' novamente
+      # Se falhar, mostra o formulário 'new' novamente
       render 'new'
     end
   end
