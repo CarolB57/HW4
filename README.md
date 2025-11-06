@@ -1,4 +1,4 @@
-# Homework 4: Adicionar novas features para a aplicação RottenPotatoes com o ciclo Behavior-Driven Design (BDD) e Test-Driven Development (TDD) fazendo uso das ferramentas Cucumber e RSpec 
+# Homework 4: Adicionar novas features para a aplicação RottenPotatoes com o ciclo Behavior-Driven Design (BDD) e Test-Driven Development (TDD), fazendo uso das ferramentas Cucumber e RSpec 
 
 **Aluna:** Caroline Bohadana Rodrigues Viana
 
